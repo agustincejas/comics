@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -11,7 +11,9 @@ export class CharactersService {
 
   constructor(private http: HttpClient) { }
 
-  getCharacters(): Observable<any>{
-    return this.http.get(environment.marvelApi + PATH_CHARACTERS_V1);
+  getCharactersByName(name: string): Observable<any>{
+    const params = new HttpParams().set('nameStartsWith', name).set('limit', '10');
+
+    return this.http.get(environment.marvelApi + PATH_CHARACTERS_V1, { params });
   }
 }

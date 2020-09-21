@@ -3,4 +3,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+.search__button-center {
+  display: block;
+  min-width: 100px;
+  border: 1px solid purple;
 }

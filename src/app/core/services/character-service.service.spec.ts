@@ -34,12 +34,14 @@ describe('CharactersService', () => {
     const charData = {
       name: 'Tony Stark'
     };
+    const name = 'tony';
+    const params = `?nameStartsWith=${name}&limit=10`;
 
-    charsService.getCharacters().subscribe(chars => {
+    charsService.getCharactersByName(name).subscribe(chars => {
       expect(chars).toEqual(charData);
     });
 
-    const req = httpTestingController.expectOne(environment.marvelApi + PATH_CHARACTERS_V1);
+    const req = httpTestingController.expectOne(environment.marvelApi + PATH_CHARACTERS_V1 + params);
 
     req.flush(charData);
     expect(req.request.method).toEqual('GET');

@@ -14,7 +14,12 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@comics-core/*": ["src/app/core/*"],
+      "@comics-shared/*": ["src/app/shared/*"],
+      "@comics-environments/*": ["src/environments/*"]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

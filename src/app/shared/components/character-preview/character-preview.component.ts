@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ICharacter } from 'src/app/core/models/character';
 
 @Component({
-  selector: 'app-character-detail',
-  templateUrl: './character-detail.component.html',
-  styleUrls: ['./character-detail.component.scss']
+  selector: 'app-character-preview',
+  templateUrl: './character-preview.component.html',
+  styleUrls: ['./character-preview.component.scss']
 })
-export class CharacterDetailComponent implements OnInit {
+export class CharacterPreviewComponent implements OnInit {
 
   @Input() character: ICharacter;
 

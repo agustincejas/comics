@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ICharacter } from '@comics-core/models/character';
 
-import { CharacterDetailComponent } from './character-detail.component';
+import { CharacterPreviewComponent } from './character-preview.component';
 
-describe('CharacterDetailComponent', () => {
-  let component: CharacterDetailComponent;
-  let fixture: ComponentFixture<CharacterDetailComponent>;
+describe('CharacterPreviewComponent', () => {
+  let component: CharacterPreviewComponent;
+  let fixture: ComponentFixture<CharacterPreviewComponent>;
   const charInput: ICharacter = {
     name: 'John Wraith',
     description:
@@ -15,13 +15,13 @@ describe('CharacterDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CharacterDetailComponent ]
+      declarations: [ CharacterPreviewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CharacterDetailComponent);
+    fixture = TestBed.createComponent(CharacterPreviewComponent);
     component = fixture.componentInstance;
     component.character = charInput;
     fixture.detectChanges();

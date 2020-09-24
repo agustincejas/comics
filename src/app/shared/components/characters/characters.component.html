@@ -1,7 +1,7 @@
 <div class="characters__container">
   <h1>Results for: <small>{{ query }}</small></h1>
   <hr>
-  <div *ngFor="let char of characters">
-    <app-character-detail [character]="char"></app-character-detail>
+  <div class="characters__grid" >
+    <app-character-preview *ngFor="let char of characters" [character]="char"></app-character-preview>
   </div>
 </div>

@@ -30,7 +30,6 @@ export class CharactersComponent implements OnInit {
               thumbnail: `${char.thumbnail.path}/${THUMBNAIL_SIZE}.${char.thumbnail.extension}`
             };
           });
-          console.log(this.characters);
       });
     });
   }

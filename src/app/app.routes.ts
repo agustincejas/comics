@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CharactersComponent } from './characters/characters.component';
+import { CharactersComponent } from '@comics-shared/components/characters/characters.component';
 import { HomeComponent } from './home/home.component';
 
 

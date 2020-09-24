@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { CharactersService } from '../core/services/characters.service';
+import { CharactersService } from '@comics-core/services/characters.service';
 
 import { CharactersComponent } from './characters.component';
 

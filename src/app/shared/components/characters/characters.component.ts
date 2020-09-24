@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CharactersService } from '../core/services/characters.service';
+import { THUMBNAIL_SIZE } from '@comics-core/constants';
+import { ICharacter } from '@comics-core/models/character';
+import { CharactersService } from '@comics-core/services/characters.service';
 
 @Component({
   selector: 'app-characters',
@@ -10,7 +12,7 @@ import { CharactersService } from '../core/services/characters.service';
 export class CharactersComponent implements OnInit {
 
   query: string;
-  characters;
+  characters: ICharacter[];
 
   constructor(private route: ActivatedRoute, private characterService: CharactersService) { }
 
@@ -20,8 +22,16 @@ export class CharactersComponent implements OnInit {
       this.characterService
         .getCharactersByName(this.query)
         .subscribe((chars) => {
-          [...[this.characters]] = chars.data.results;
-        });
+          const [...charsResult] = chars.data.results;
+          this.characters = charsResult.map(char => {
+            return {
+              name: char.name,
+              description: char.description,
+              thumbnail: `${char.thumbnail.path}/${THUMBNAIL_SIZE}.${char.thumbnail.extension}`
+            };
+          });
+          console.log(this.characters);
+      });
     });
   }
 

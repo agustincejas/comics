@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICharacter } from 'src/app/core/models/character';
 
 @Component({
@@ -10,9 +11,13 @@ export class CharacterPreviewComponent implements OnInit {
 
   @Input() character: ICharacter;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  goToDetailView() {
+    this.router.navigate(['characters/detail', this.character.id]);
   }
 
 }

@@ -23,13 +23,7 @@ export class CharactersComponent implements OnInit {
         .getCharactersByName(this.query)
         .subscribe((chars) => {
           const [...charsResult] = chars.data.results;
-          this.characters = charsResult.map(char => {
-            return {
-              name: char.name,
-              description: char.description,
-              thumbnail: `${char.thumbnail.path}/${THUMBNAIL_SIZE}.${char.thumbnail.extension}`
-            };
-          });
+          this.characters = this.characterService.formatCharacters(charsResult);
       });
     });
   }

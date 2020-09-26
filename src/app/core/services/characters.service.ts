@@ -24,7 +24,7 @@ export class CharactersService {
     return this.http.get(`${environment.marvelApi + PATH_CHARACTERS_V1}/${charId + PATH_COMICS}`);
   }
 
-  formatCharacters(chars: []): ICharacter[] {
+  formatCharacters(chars: any[]): ICharacter[] {
     const formattedChars = chars.map((char: any) => {
       return {
         id: char.id,
@@ -37,9 +37,23 @@ export class CharactersService {
     return formattedChars;
   }
 
-  getCharacterById(id: number) {
-    return this.characters.find( char => {
-      return char.id === id;
+  getCharacterById(id: number): Observable<ICharacter> {
+    return new Observable((observer) => {
+      let charResult: ICharacter;
+      if (this.characters) {
+        charResult = this.characters.find((char) => {
+          return char.id === id;
+        });
+        observer.next(charResult);
+      } else {
+        this.http
+          .get(`${environment.marvelApi + PATH_CHARACTERS_V1}/${id}`)
+          .subscribe((char: any) => {
+            const arr = [...char.data.results];
+            charResult = this.formatCharacters(arr)[0];
+            observer.next(charResult);
+          });
+      }
     });
   }
 }

@@ -24,9 +24,9 @@ export class CharacterDetailComponent implements OnInit {
         // tslint:disable-next-line: radix
         this.charactersService.getCharacterById(parseInt(params.id)),
         this.charactersService.getComicsByCharacter(params.id)
-      ]).subscribe((results) =>{
+      ]).subscribe((results) => {
         this.character = results[0];
-        this.comics = results[1];
+        this.comics = this.charactersService.formatComics(results[1].data.results);
       });
     });
   }

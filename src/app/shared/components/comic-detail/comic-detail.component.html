@@ -1,0 +1,9 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{comic.name}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+        <img [src]="comic.thumbnail" alt="character thumbnail">
+      <div><a [href]="comic.url">More Info</a></div>
+  </mat-card-content>
+</mat-card>

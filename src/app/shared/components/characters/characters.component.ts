@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { THUMBNAIL_SIZE } from '@comics-core/constants';
 import { ICharacter } from '@comics-core/models/character';
 import { CharactersService } from '@comics-core/services/characters.service';
 

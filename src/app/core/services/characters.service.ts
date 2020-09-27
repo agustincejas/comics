@@ -1,9 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ICharacter } from '@comics-core/models/character';
+import { IComic } from '@comics-core/models/comic';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { PATH_CHARACTERS_V1, PATH_COMICS, THUMBNAIL_SIZE } from '../constants';
+import { PATH_CHARACTERS_V1, PATH_COMICS, THUMBNAIL_SIZE_CHARACTER, THUMBNAIL_SIZE_COMIC } from '../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { PATH_CHARACTERS_V1, PATH_COMICS, THUMBNAIL_SIZE } from '../constants';
 export class CharactersService {
 
   characters: ICharacter[];
+  comics: IComic[];
 
   constructor(private http: HttpClient) { }
 
@@ -21,7 +23,21 @@ export class CharactersService {
   }
 
   getComicsByCharacter(charId: number): Observable<any> {
-    return this.http.get(`${environment.marvelApi + PATH_CHARACTERS_V1}/${charId + PATH_COMICS}`);
+    const params = new HttpParams().set('orderBy', 'title');
+    return this.http.get(`${environment.marvelApi + PATH_CHARACTERS_V1}/${charId + PATH_COMICS}`, { params });
+  }
+
+  formatComics(comics: any[]): IComic[] {
+    const formattedComics = comics.map((comic: any) => {
+      return {
+        id: comic.id,
+        name: comic.title,
+        thumbnail: `${comic.thumbnail.path}/${THUMBNAIL_SIZE_COMIC}.${comic.thumbnail.extension}`,
+        url: comic.urls[0].url
+      };
+    });
+    this.comics = formattedComics;
+    return formattedComics;
   }
 
   formatCharacters(chars: any[]): ICharacter[] {
@@ -30,7 +46,7 @@ export class CharactersService {
         id: char.id,
         name: char.name,
         description: char.description,
-        thumbnail: `${char.thumbnail.path}/${THUMBNAIL_SIZE}.${char.thumbnail.extension}`,
+        thumbnail: `${char.thumbnail.path}/${THUMBNAIL_SIZE_CHARACTER}.${char.thumbnail.extension}`,
       };
     });
     this.characters = formattedChars;

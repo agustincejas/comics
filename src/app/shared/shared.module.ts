@@ -5,6 +5,7 @@ import { CharacterPreviewComponent } from './components/character-preview/charac
 import { CharactersComponent } from './components/characters/characters.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
+import { ComicDetailComponent } from './components/comic-detail/comic-detail.component';
 
 
 
@@ -13,7 +14,8 @@ import { CharacterDetailComponent } from './components/character-detail/characte
     CharactersComponent,
     SpinnerComponent,
     CharacterPreviewComponent,
-    CharacterDetailComponent
+    CharacterDetailComponent,
+    ComicDetailComponent
   ],
   imports: [CommonModule, MaterialModule],
   exports: [

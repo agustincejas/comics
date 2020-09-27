@@ -9,6 +9,10 @@
     </p>
   </mat-card-content>
 </mat-card>
-<div *ngIf="comics">
-  <app-comic-detail  *ngFor="let comic of comics" [comic]="comic"></app-comic-detail>
-</div>
+<section *ngIf="comics">
+  <h2>Comics</h2>
+  <div class="comics__grid">
+    <app-comic-detail *ngFor="let comic of comics" [comic]="comic"></app-comic-detail>
+  </div>
+
+</section>

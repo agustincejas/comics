@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ICharacter } from '@comics-core/models/character';
 import { IComic } from '@comics-core/models/comic';
+import { IPaginator } from '@comics-core/models/paginator';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PATH_CHARACTERS_V1, PATH_COMICS, THUMBNAIL_SIZE_CHARACTER, THUMBNAIL_SIZE_COMIC } from '../constants';
@@ -22,9 +23,15 @@ export class CharactersService {
     return this.http.get(environment.marvelApi + PATH_CHARACTERS_V1, { params });
   }
 
-  getComicsByCharacter(charId: number): Observable<any> {
-    const params = new HttpParams().set('orderBy', 'title');
-    return this.http.get(`${environment.marvelApi + PATH_CHARACTERS_V1}/${charId + PATH_COMICS}`, { params });
+  getComicsByCharacter(charId: number, paginator: IPaginator): Observable<any> {
+      const offset = paginator.pageIndex * paginator.pageSize;
+      const limit = paginator.pageSize;
+      const params = new HttpParams()
+        .set('offset', offset.toString())
+        .set('limit',limit.toString())
+        .set('orderBy', 'title');
+
+      return this.http.get(`${environment.marvelApi + PATH_CHARACTERS_V1}/${charId + PATH_COMICS}`, { params });
   }
 
   formatComics(comics: any[]): IComic[] {

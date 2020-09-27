@@ -14,5 +14,6 @@
   <div class="comics__grid">
     <app-comic-detail *ngFor="let comic of comics" [comic]="comic"></app-comic-detail>
   </div>
+  <mat-paginator (page)="onPageChanged($event)" [length]="paginator.length" [pageSize]="paginator.pageSize" [pageSizeOptions]="[16, 32]"></mat-paginator>
 
 </section>

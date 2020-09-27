@@ -1,4 +1,5 @@
 .comics__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(15.82%,1fr));
+  grid-gap: 1rem;
+  grid-template-columns: repeat(8, 1fr);
 }

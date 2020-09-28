@@ -1,19 +1,18 @@
-<mat-card *ngIf="character" class="card__container">
-  <mat-card-header>
-    <mat-card-title>{{character.name}}</mat-card-title>
-    <img [src]="character.thumbnail" alt="character thumbnail">
-  </mat-card-header>
-  <mat-card-content>
-    <p>
-      {{character.description}}
-    </p>
-  </mat-card-content>
-</mat-card>
-<section *ngIf="comics">
-  <h2>Comics({{paginator.length}})</h2>
-  <div class="comics__grid">
-    <app-comic-detail *ngFor="let comic of comics" [comic]="comic"></app-comic-detail>
+<div class="character-detail__container">
+  <div *ngIf="character" class="card__container">
+      <h1>{{character.name}}</h1>
+      <img [src]="thumbnailURL" alt="character thumbnail">
+    <div>
+      <p>
+        {{character.description}}
+      </p>
+    </div>
   </div>
-  <mat-paginator (page)="onPageChanged($event)" [length]="paginator.length" [pageSize]="paginator.pageSize" [pageSizeOptions]="[16, 32]"></mat-paginator>
-
-</section>
+  <section *ngIf="comics">
+    <h2>Comics({{paginator.length}})</h2>
+    <div class="comics__grid">
+      <app-comic-detail *ngFor="let comic of comics" [comic]="comic"></app-comic-detail>
+    </div>
+    <mat-paginator (page)="onPageChanged($event)" [length]="paginator.length" [pageSize]="paginator.pageSize" [pageSizeOptions]="[16, 32]"></mat-paginator>
+  </section>
+</div>

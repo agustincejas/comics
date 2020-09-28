@@ -3,42 +3,57 @@ import { ActivatedRoute } from '@angular/router';
 import { ICharacter } from '@comics-core/models/character';
 import { IComic } from '@comics-core/models/comic';
 import { IPaginator } from '@comics-core/models/paginator';
+import { IThumbnailSize } from '@comics-core/models/thumbnail-size';
 import { CharactersService } from '@comics-core/services/characters.service';
 import { combineLatest, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-character-detail',
   templateUrl: './character-detail.component.html',
-  styleUrls: ['./character-detail.component.scss']
+  styleUrls: ['./character-detail.component.scss'],
 })
 export class CharacterDetailComponent implements OnInit {
-
   comics: IComic[];
   character: ICharacter;
   comicsLength: number;
   comicId: number;
   paginator: IPaginator;
+  thumbnailSize: IThumbnailSize;
+  thumbnailURL: string;
 
-  constructor(private route: ActivatedRoute, private charactersService: CharactersService) {
+  constructor(
+    private route: ActivatedRoute,
+    private charactersService: CharactersService
+  ) {
     this.paginator = {
       pageSize: 20,
       previousPage: 0,
       pageIndex: 0,
-      length: 0
+      length: 0,
+    };
+
+    this.thumbnailSize = {
+      type: 'landscape',
+      size: 'incredible',
     };
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.comicId = parseInt(params.id, 10);
-      combineLatest(
-      [
+      combineLatest([
         this.charactersService.getCharacterById(this.comicId),
-        this.getComics(this.comicId, this.paginator)
+        this.getComics(this.comicId, this.paginator),
       ]).subscribe((results) => {
         this.character = results[0];
-        this.comics = this.charactersService.formatComics(results[1].data.results);
+        this.comics = this.charactersService.formatComics(
+          results[1].data.results
+        );
         this.paginator.length = results[1].data.total;
+        this.thumbnailURL = this.charactersService.getThumbnailURL(
+          this.thumbnailSize,
+          this.character.thumbnail
+        );
       });
     });
   }
@@ -49,9 +64,8 @@ export class CharacterDetailComponent implements OnInit {
 
   onPageChanged(event: IPaginator) {
     this.paginator = event;
-    this.getComics(this.comicId, this.paginator).subscribe( comics => {
+    this.getComics(this.comicId, this.paginator).subscribe((comics) => {
       this.comics = this.charactersService.formatComics(comics.data.results);
     });
   }
-
 }

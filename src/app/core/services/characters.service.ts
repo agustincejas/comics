@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { ICharacter } from '@comics-core/models/character';
 import { IComic } from '@comics-core/models/comic';
 import { IPaginator } from '@comics-core/models/paginator';
+import { IThumbail } from '@comics-core/models/thumbnail';
+import { IThumbnailSize } from '@comics-core/models/thumbnail-size';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PATH_CHARACTERS_V1, PATH_COMICS, THUMBNAIL_SIZE_CHARACTER, THUMBNAIL_SIZE_COMIC } from '../constants';
@@ -53,7 +55,7 @@ export class CharactersService {
         id: char.id,
         name: char.name,
         description: char.description,
-        thumbnail: `${char.thumbnail.path}/${THUMBNAIL_SIZE_CHARACTER}.${char.thumbnail.extension}`,
+        thumbnail: char.thumbnail
       };
     });
     this.characters = formattedChars;
@@ -78,5 +80,9 @@ export class CharactersService {
           });
       }
     });
+  }
+
+  getThumbnailURL(size: IThumbnailSize, thumbnail: IThumbail): string {
+    return `${thumbnail.path}/${size.type}_${size.size}.${thumbnail.extension}`;
   }
 }

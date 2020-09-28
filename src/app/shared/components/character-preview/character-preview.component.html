@@ -2,7 +2,7 @@
   <mat-card-header class="card--pointer" (click)="goToDetailView()">
     <mat-card-title>{{character.name}}</mat-card-title>
   </mat-card-header>
-  <img mat-card-image class="card--pointer" (click)="goToDetailView()" [src]="character.thumbnail" [alt]="'Photo of' + character.name">
+  <img mat-card-image class="card--pointer" (click)="goToDetailView()" [src]="thumbnailURL" [alt]="'Photo of' + character.name">
   <mat-card-content>
     <p>
       {{character.description}}

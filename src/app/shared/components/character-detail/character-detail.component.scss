@@ -1,3 +1,7 @@
+.character-detail__container {
+  padding: 5%;
+}
+
 .comics__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit,minmax(168px,168px));

@@ -1,8 +1,8 @@
-import { IComic } from './comic';
+import { IThumbail } from './thumbnail';
 
 export interface ICharacter {
   id: number;
   name: string;
   description: string;
-  thumbnail: string;
+  thumbnail: IThumbail;
 }

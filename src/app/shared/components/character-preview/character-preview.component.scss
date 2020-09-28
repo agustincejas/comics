@@ -1,8 +1,7 @@
 .card__container {
-  min-height: 100%;
-  max-width: 270px;
+  height: calc(100% - 36px);
 }
 
-.card__header--pointer {
+.card--pointer {
   cursor: pointer;
 }

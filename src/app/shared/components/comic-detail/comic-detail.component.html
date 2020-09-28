@@ -1,5 +1,5 @@
-<div class="card">
-  <legend>{{comic.name}}</legend>
+<div class="card__container">
   <img [src]="comic.thumbnail" alt="character thumbnail">
-  <div><a [href]="comic.url">More Info</a></div>
+  <legend>{{comic.name}}</legend>
+  <a class="card__link" [href]="comic.url">More Info</a>
 </div>

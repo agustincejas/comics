@@ -10,7 +10,7 @@
   </mat-card-content>
 </mat-card>
 <section *ngIf="comics">
-  <h2>Comics</h2>
+  <h2>Comics({{paginator.length}})</h2>
   <div class="comics__grid">
     <app-comic-detail *ngFor="let comic of comics" [comic]="comic"></app-comic-detail>
   </div>

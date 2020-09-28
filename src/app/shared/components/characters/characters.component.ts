@@ -18,13 +18,16 @@ export class CharactersComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.query = params.id;
-      this.characterService
-        .getCharactersByName(this.query)
-        .subscribe((chars) => {
-          const [...charsResult] = chars.data.results;
-          this.characters = this.characterService.formatCharacters(charsResult);
-      });
+      this.getChars(this.query);
     });
   }
 
+  getChars(q: string) {
+    this.characterService
+      .getCharactersByName(q)
+      .subscribe((chars) => {
+        const [...charsResult] = chars.data.results;
+        this.characters = this.characterService.formatCharacters(charsResult);
+      });
+  }
 }

@@ -4,5 +4,7 @@
 
 .characters__grid {
   display: grid;
-  grid-template: repeat(4,auto)/ repeat(4,1fr);
+  grid-template-columns: repeat(auto-fit,minmax(200px,350px));
+  grid-auto-rows: 1fr;
+  gap: 20px;
 }

@@ -21,7 +21,7 @@ export class CharacterDetailComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private charactersService: CharactersService) {
     this.paginator = {
-      pageSize: 16,
+      pageSize: 20,
       previousPage: 0,
       pageIndex: 0,
       length: 0

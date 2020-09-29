@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatPaginator } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { CharactersService } from '@comics-core/services/characters.service';
-
 import { CharactersComponent } from './characters.component';
+
 
 describe('CharactersComponent', () => {
   let component: CharactersComponent;
@@ -22,7 +23,7 @@ describe('CharactersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CharactersComponent ],
+      declarations: [ CharactersComponent, MatPaginator ],
       providers: [
         { provide: ActivatedRoute, useValue: mockRoute },
         { provide: CharactersService, useValue: mockCharactersService}

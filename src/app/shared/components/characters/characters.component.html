@@ -1,6 +1,9 @@
 <div class="characters__container">
-  <h1>Results for: <small>{{ query }}</small></h1>
+  <h1>Results for: <small>{{ query }}</small><small *ngIf="characters"> ({{paginator.length}})</small></h1>
   <hr>
+  <div *ngIf="characters?.length === 0">
+    Your search did not match any characters.
+  </div>
   <div class="characters__grid" >
     <app-character-preview *ngFor="let char of characters" [character]="char"></app-character-preview>
   </div>

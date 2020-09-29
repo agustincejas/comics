@@ -13,7 +13,6 @@ export class ComicDetailComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    const algo = this.comic;
   }
 
 }

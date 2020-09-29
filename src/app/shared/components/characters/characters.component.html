@@ -4,4 +4,6 @@
   <div class="characters__grid" >
     <app-character-preview *ngFor="let char of characters" [character]="char"></app-character-preview>
   </div>
+  <mat-paginator (page)="onPageChanged($event)" [length]="paginator.length" [pageSize]="paginator.pageSize"
+    [pageSizeOptions]="[10, 20]"></mat-paginator>
 </div>

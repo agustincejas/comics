@@ -10,30 +10,37 @@ import { environment } from 'src/environments/environment';
 import { PATH_CHARACTERS_V1, PATH_COMICS, THUMBNAIL_SIZE_CHARACTER, THUMBNAIL_SIZE_COMIC } from '../constants';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CharactersService {
-
   characters: ICharacter[];
   comics: IComic[];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getCharactersByName(name: string): Observable<any>{
-    const params = new HttpParams().set('nameStartsWith', name).set('limit', '10');
+  getCharactersByName(name: string, paginator: IPaginator): Observable<any> {
+    const offset = paginator.pageIndex * paginator.pageSize;
+    const limit = paginator.pageSize;
+    const params = new HttpParams()
+      .set('offset', offset.toString())
+      .set('limit', limit.toString())
+      .set('nameStartsWith', name);
 
-    return this.http.get(environment.marvelApi + PATH_CHARACTERS_V1, { params });
+    return this.http.get(environment.marvelApi + PATH_CHARACTERS_V1, {params});
   }
 
   getComicsByCharacter(charId: number, paginator: IPaginator): Observable<any> {
-      const offset = paginator.pageIndex * paginator.pageSize;
-      const limit = paginator.pageSize;
-      const params = new HttpParams()
-        .set('offset', offset.toString())
-        .set('limit',limit.toString())
-        .set('orderBy', 'title');
+    const offset = paginator.pageIndex * paginator.pageSize;
+    const limit = paginator.pageSize;
+    const params = new HttpParams()
+      .set('offset', offset.toString())
+      .set('limit', limit.toString())
+      .set('orderBy', 'title');
 
-      return this.http.get(`${environment.marvelApi + PATH_CHARACTERS_V1}/${charId + PATH_COMICS}`, { params });
+    return this.http.get(
+      `${environment.marvelApi + PATH_CHARACTERS_V1}/${charId + PATH_COMICS}`,
+      { params }
+    );
   }
 
   formatComics(comics: any[]): IComic[] {
@@ -42,7 +49,7 @@ export class CharactersService {
         id: comic.id,
         name: comic.title,
         thumbnail: `${comic.thumbnail.path}/${THUMBNAIL_SIZE_COMIC}.${comic.thumbnail.extension}`,
-        url: comic.urls[0].url
+        url: comic.urls[0].url,
       };
     });
     this.comics = formattedComics;
@@ -55,7 +62,7 @@ export class CharactersService {
         id: char.id,
         name: char.name,
         description: char.description,
-        thumbnail: char.thumbnail
+        thumbnail: char.thumbnail,
       };
     });
     this.characters = formattedChars;
